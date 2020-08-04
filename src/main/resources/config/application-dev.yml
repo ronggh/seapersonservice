@@ -60,20 +60,20 @@ spring:
 #  client:
 #    manager-address: 192.168.30.97:8070
 #
-#eureka:
-#  client:
-#    #    register-with-eureka: false #把自己当成客户端
-#    #    fetch-registry: false
-#    healthcheck:
-#      enabled: false   #关闭健康检查，不然无法注册到eureka注册中心
-#    #普通安全级别设置访问Eureka的访问密码
-#    serviceUrl:
-#      defaultZone: http://192.168.30.94:8761/eureka
-#  instance:
-#    prefer-ip-address: true
-#    #自定义 eureka 监控服务的ip服务名等
-#    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
-##ribbon.eureka.enable: true
+eureka:
+  client:
+    #    register-with-eureka: false #把自己当成客户端
+    #    fetch-registry: false
+    healthcheck:
+      enabled: false   #关闭健康检查，不然无法注册到eureka注册中心
+    #普通安全级别设置访问Eureka的访问密码
+    serviceUrl:
+      defaultZone: http://119.23.71.198:8761/eureka
+  instance:
+    prefer-ip-address: true
+    #自定义 eureka 监控服务的ip服务名等
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+#ribbon.eureka.enable: true
 #
 #
 #jwt:
