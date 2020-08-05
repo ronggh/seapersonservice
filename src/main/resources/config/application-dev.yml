@@ -1,6 +1,12 @@
 server:
   port: 30007
 
+#文件上传路径
+file:
+  #虚拟路径，对外展示
+  staticAccessPath: /file/**
+  #本地测试真实路径，可以改为服务器tomcat中路径
+  fileupload:  E:/fileupload/
 
 spring:
   profiles:

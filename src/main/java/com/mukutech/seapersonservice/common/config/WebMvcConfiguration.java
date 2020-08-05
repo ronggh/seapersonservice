@@ -1,5 +1,6 @@
 package com.mukutech.seapersonservice.common.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -25,6 +26,13 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
+
+    @Value("${file.fileupload}")
+    private String fileupload;
+
+    @Value("${file.staticAccessPath}")
+    private String staticAccessPath;
+
     @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
@@ -73,7 +81,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry resourceHandlerRegistry) {
-
+        resourceHandlerRegistry.addResourceHandler(staticAccessPath).addResourceLocations("file:" + fileupload);
     }
 
     @Override

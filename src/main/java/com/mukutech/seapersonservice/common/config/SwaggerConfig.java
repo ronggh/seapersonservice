@@ -52,8 +52,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("上海慕库科技发展网站api文档")
-                .description("上海慕库科技发展网站V1_2020")
+                .title("海外有你后端服务api文档")
+                .description("海外有你后端服务V1_2020")
                 //.termsOfServiceUrl("https://test")
                 .version("0.1")
                 .build();
