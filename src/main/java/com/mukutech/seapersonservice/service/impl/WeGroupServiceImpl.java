@@ -278,4 +278,5 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
         }
         return list;
     }
+
 }
