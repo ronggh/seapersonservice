@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mukutech.seapersonservice.mapper.WeGroupMapper">
+
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="com.mukutech.seapersonservice.entity.WeGroup">
+                    <id column="group_id" property="groupId"/>
+                    <result column="group_name" property="groupName"/>
+                    <result column="group_desc" property="groupDesc"/>
+                    <result column="apply_reason" property="applyReason"/>
+                    <result column="group_head_img" property="groupHeadImg"/>
+                    <result column="verify_flag" property="verifyFlag"/>
+                    <result column="create_uid" property="createUid"/>
+                    <result column="school_id" property="schoolId"/>
+
+                    <result column="member_tip" property="memberTip"/>
+                    <result column="note_tip" property="noteTip"/>
+                    <result column="status" property="status"/>
+                    <result column="createtime" property="createtime"/>
+                    <result column="updatetime" property="updatetime"/>
+        </resultMap>
+
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+            group_id, group_name, group_desc, apply_reason, group_head_img, verify_flag, create_uid, school_id,member_tip, note_tip, status, createtime, updatetime
+        </sql>
+
+
+
+</mapper>
