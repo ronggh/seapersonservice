@@ -20,7 +20,7 @@ import java.util.Date;
 public class TestDemoVO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户OFFSET")
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户账号")
     private String userCode;

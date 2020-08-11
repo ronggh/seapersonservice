@@ -19,13 +19,13 @@ import java.util.List;
 public interface ITestDemoService extends IService<TestDemo> {
     ResponseEnvelope searchTestDemoListPage(TestDemoDTO DTO);
 
-    public ResponseEnvelope searchTestDemoOne(Long id);
+    public ResponseEnvelope searchTestDemoOne(Integer id);
 
     public ResponseEnvelope addTestDemo(TestDemoDTO DTO);
 
     public ResponseEnvelope updateTestDemo(TestDemoDTO DTO);
 
-    public ResponseEnvelope deleteTestDemo(Long id);
+    public ResponseEnvelope deleteTestDemo(Integer id);
 
     ResponseEnvelope addNotes(NotesDTO dto);
 
@@ -35,25 +35,25 @@ public interface ITestDemoService extends IService<TestDemo> {
 
     ResponseEnvelope updateNumByGid(ShopCarDTO dto);
 
-    ResponseEnvelope delGoodByIds(List<Long> goodIds);
+    ResponseEnvelope delGoodByIds(List<Integer> goodIds);
 
     ResponseEnvelope calPriceByGids(List<ShopCarDTO> dto);
 
-    ResponseEnvelope getMyOrderList(Long userId);
+    ResponseEnvelope getMyOrderList(Integer userId);
 
     ResponseEnvelope addMyFeedBack(FeedBackDTO feedBackDTO);
 
     ResponseEnvelope rechargeMyAccount(RechargeDTO rechargeDTO);
 
-    ResponseEnvelope getMyBillList(Long userId, Integer month);
+    ResponseEnvelope getMyBillList(Integer userId, Integer month);
 
     ResponseEnvelope setMyAccountSafe(AccountSafeDTO accountSafeDTO);
 
-    ResponseEnvelope loginOut(Long userId);
+    ResponseEnvelope loginOut(Integer userId);
 
-    ResponseEnvelope hideMyTrace(Long userId);
+    ResponseEnvelope hideMyTrace(Integer userId);
 
     ResponseEnvelope lockLoginInfo(AccountSafeDTO accountSafeDTO);
 
-    ResponseEnvelope getMyBlackList(Long userId);
+    ResponseEnvelope getMyBlackList(Integer userId);
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class FeedBackDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键ID")
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户ID")
     private Long userId;

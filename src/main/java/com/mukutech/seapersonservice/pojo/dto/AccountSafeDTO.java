@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class AccountSafeDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "登录密码")
     private String password;

@@ -18,7 +18,7 @@ public class RechargeDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    private Integer userId;
 
     @ApiModelProperty(value = "操作类型，1-充值；2-提现")
     private Integer operType;

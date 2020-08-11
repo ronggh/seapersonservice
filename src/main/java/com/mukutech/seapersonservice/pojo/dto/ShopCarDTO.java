@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class ShopCarDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键ID")
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "商品ID")
     private Long goodId;

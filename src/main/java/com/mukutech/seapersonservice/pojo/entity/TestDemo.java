@@ -3,6 +3,7 @@ package com.mukutech.seapersonservice.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import io.swagger.models.auth.In;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -29,7 +30,7 @@ public class TestDemo extends Model<TestDemo> {
      * 用户OFFSET
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
     /**
      * 用户账号
      */

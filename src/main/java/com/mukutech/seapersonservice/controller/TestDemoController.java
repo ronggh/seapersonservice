@@ -56,7 +56,7 @@ public class TestDemoController {
 //
 //    @ApiOperation(value = "用户基础属性表详细查询", notes = "用户基础属性表API")
 //    @RequestMapping(value = "/searchTestDemoOne", method = RequestMethod.GET)
-//    public ResponseEnvelope searchTestDemoOne(Long id) {
+//    public ResponseEnvelope searchTestDemoOne(Integer id) {
 //        return iTestDemoService.searchTestDemoOne(id);
 //    }
 //
@@ -74,7 +74,7 @@ public class TestDemoController {
 //
 //    @ApiOperation(value = "用户基础属性表删除", notes = "用户基础属性表API")
 //    @RequestMapping(value = "/deleteTestDemo", method = RequestMethod.GET)
-//    public ResponseEnvelope deleteTestDemo(Long id) {
+//    public ResponseEnvelope deleteTestDemo(Integer id) {
 //        return iTestDemoService.deleteTestDemo(id);
 //    }
 
@@ -147,7 +147,7 @@ public class TestDemoController {
 
     @ApiOperation(value = "根据商品ID删除购物车中的商品", notes = "个人中心-购物车API")
     @RequestMapping(value = "/delGoodByIds", method = RequestMethod.POST)
-    public ResponseEnvelope delGoodByIds(@RequestParam("goodIds") List<Long> goodIds) {
+    public ResponseEnvelope delGoodByIds(@RequestParam("goodIds") List<Integer> goodIds) {
         return iTestDemoService.delGoodByIds(goodIds);
     }
 
@@ -161,7 +161,7 @@ public class TestDemoController {
     /***************个人中心-我的订单-接口********************/
     @ApiOperation(value = "获取我的订单列表", notes = "个人中心-我的订单API")
     @RequestMapping(value = "/getMyOrderList", method = RequestMethod.POST)
-    public ResponseEnvelope getMyOrderList(@RequestParam("userId") Long userId) {
+    public ResponseEnvelope getMyOrderList(@RequestParam("userId") Integer userId) {
         return iTestDemoService.getMyOrderList(userId);
     }
 
@@ -190,7 +190,7 @@ public class TestDemoController {
     /***************个人中心-钱包账单-接口********************/
     @ApiOperation(value = "获取我的钱包账单列表", notes = "个人中心-钱包账单API")
     @RequestMapping(value = "/getMyBillList", method = RequestMethod.POST)
-    public ResponseEnvelope getMyBillList(@RequestParam("userId") Long userId, @RequestParam("month") Integer month) {
+    public ResponseEnvelope getMyBillList(@RequestParam("userId") Integer userId, @RequestParam("month") Integer month) {
         return iTestDemoService.getMyBillList(userId, month);
     }
     /***************个人中心-钱包账单-接口********************/
@@ -205,13 +205,13 @@ public class TestDemoController {
 
     @ApiOperation(value = "注销我的账号", notes = "个人中心-设置API")
     @RequestMapping(value = "/loginOut", method = RequestMethod.POST)
-    public ResponseEnvelope loginOut(@RequestParam("userId") Long userId) {
+    public ResponseEnvelope loginOut(@RequestParam("userId") Integer userId) {
         return iTestDemoService.loginOut(userId);
     }
 
     @ApiOperation(value = "设置隐藏我的笔记", notes = "个人中心-设置API")
     @RequestMapping(value = "/hideMyTrace", method = RequestMethod.POST)
-    public ResponseEnvelope hideMyTrace(@RequestParam("userId") Long userId) {
+    public ResponseEnvelope hideMyTrace(@RequestParam("userId") Integer userId) {
         return iTestDemoService.hideMyTrace(userId);
     }
 
@@ -223,7 +223,7 @@ public class TestDemoController {
 
     @ApiOperation(value = "获取我的黑名单列表", notes = "个人中心-设置API")
     @RequestMapping(value = "/getMyBlackList", method = RequestMethod.POST)
-    public ResponseEnvelope getMyBlackList(@RequestParam("userId") Long userId) {
+    public ResponseEnvelope getMyBlackList(@RequestParam("userId") Integer userId) {
         return iTestDemoService.getMyBlackList(userId);
     }
     /***************个人中心-设置-接口********************/

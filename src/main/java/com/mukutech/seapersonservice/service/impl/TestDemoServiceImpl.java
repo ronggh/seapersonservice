@@ -47,7 +47,7 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope searchTestDemoOne(Long id) {
+    public ResponseEnvelope searchTestDemoOne(Integer id) {
         return ResultVOUtil.returnSuccess(this.selectOne(id));
     }
 
@@ -68,7 +68,7 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope deleteTestDemo(Long id) {
+    public ResponseEnvelope deleteTestDemo(Integer id) {
         testDemoMapper.deleteById(id);
         return ResultVOUtil.returnSuccess();
     }
@@ -94,7 +94,7 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope delGoodByIds(List<Long> goodIds) {
+    public ResponseEnvelope delGoodByIds(List<Integer> goodIds) {
         return null;
     }
 
@@ -104,7 +104,7 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope getMyOrderList(Long userId) {
+    public ResponseEnvelope getMyOrderList(Integer userId) {
         return null;
     }
 
@@ -119,7 +119,7 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope getMyBillList(Long userId, Integer month) {
+    public ResponseEnvelope getMyBillList(Integer userId, Integer month) {
         return null;
     }
 
@@ -129,12 +129,12 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope loginOut(Long userId) {
+    public ResponseEnvelope loginOut(Integer userId) {
         return null;
     }
 
     @Override
-    public ResponseEnvelope hideMyTrace(Long userId) {
+    public ResponseEnvelope hideMyTrace(Integer userId) {
         return null;
     }
 
@@ -144,12 +144,12 @@ public class TestDemoServiceImpl extends ServiceImpl<TestDemoMapper, TestDemo> i
     }
 
     @Override
-    public ResponseEnvelope getMyBlackList(Long userId) {
+    public ResponseEnvelope getMyBlackList(Integer userId) {
         return null;
     }
 
 
-    public TestDemo selectOne(Long id) {
+    public TestDemo selectOne(Integer id) {
         TestDemo entity = new TestDemo();
         entity.setId(id);
         QueryWrapper<TestDemo> queryWrapper = new QueryWrapper<>();

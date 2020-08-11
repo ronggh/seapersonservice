@@ -1,6 +1,7 @@
 package com.mukutech.seapersonservice.pojo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import java.util.Date;
 public class TestDemoDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户OFFSET")
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户账号")
     private String userCode;

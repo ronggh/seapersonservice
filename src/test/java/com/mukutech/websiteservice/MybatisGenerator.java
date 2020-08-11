@@ -16,13 +16,13 @@ import java.util.List;
 
 public class MybatisGenerator {
 
-    static String outPath = "D:/GenJavaFile";
+    static String outPath = "C:/seapersonservice/src/main/java";
     static String author = "LMYOU";
     static String driverName = "com.mysql.jdbc.Driver";
-    static String url = "jdbc:mysql://localhost:3306/center_test_db?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC";
+    static String url = "jdbc:mysql://119.23.71.198:3306/overseadb?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC";
     static String username = "root";
     static String password = "admin";
-    static String[] tables = new String[]{"TEST_DEMO"};
+    static String[] tables = new String[]{"we_group_member"};
     //static String delete_falg = "DEL_FLAG";
 
     public static void main(String[] args) throws InterruptedException {
