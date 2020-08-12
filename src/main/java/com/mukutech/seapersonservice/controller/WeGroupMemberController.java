@@ -39,26 +39,26 @@ public class WeGroupMemberController {
     private IWeGroupMemberService iWeGroupMemberService;
 
     // 01- 用户加入社群
-    @ApiOperation(value = "01 - 加入社群", notes = "用户加入社群")
+    @ApiOperation(position = 1, value = "01 - 加入社群", notes = "用户加入社群")
     @RequestMapping(value = "/joinGroup", method = RequestMethod.GET)
     public ResponseEnvelope joinGroup(@Param("uid") Integer uid, @Param("groupId") Integer groupId) {
         return iWeGroupMemberService.joinGroup(uid, groupId);
     }
 
-    @ApiOperation(value = "02 - 退出社群", notes = "社群成员退出")
+    @ApiOperation(position = 2, value = "02 - 退出社群", notes = "社群成员退出")
     @RequestMapping(value = "/quitGroup", method = RequestMethod.GET)
     public ResponseEnvelope quitGroup(Integer uid, Integer groupId) {
-        return iWeGroupMemberService.quitGroup(uid,groupId);
+        return iWeGroupMemberService.quitGroup(uid, groupId);
     }
 
-    @ApiOperation(value = "03 - 成员禁言/解禁", notes = "成员禁言/解禁，isForbidden -- 0：解禁 ，1：禁言")
+    @ApiOperation(position = 3, value = "03 - 成员禁言/解禁", notes = "成员禁言/解禁，isForbidden -- 0：解禁 ，1：禁言")
     @RequestMapping(value = "/quitGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage","dto.id","dto.userRole"})
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.id", "dto.userRole"})
     public ResponseEnvelope forbiddenOrNot(@RequestBody WeGroupMemberDTO dto) {
         Integer groupId = dto.getGroupId();
         Integer uid = dto.getUid();
         String isForbidden = dto.getIsForbidden();
-        return iWeGroupMemberService.forbiddenOrNot(groupId,uid,isForbidden);
+        return iWeGroupMemberService.forbiddenOrNot(groupId, uid, isForbidden);
     }
 
 }

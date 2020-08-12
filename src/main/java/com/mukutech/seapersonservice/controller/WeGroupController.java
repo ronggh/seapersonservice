@@ -37,25 +37,24 @@ public class WeGroupController {
     private IWeGroupService iWeGroupService;
 
     // 01-创建社群
-    @ApiOperation(value = "01-创建社群", notes = "创建社群")
+    @ApiOperation(position = 1, value = "01-创建社群", notes = "创建社群")
     @RequestMapping(value = "/addWeGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.groupId","dto.groupMark","memberTip","noteTip"})
-    public ResponseEnvelope addWeGroup(@RequestBody WeGroupDTO dto)
-    {
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.groupId", "dto.groupMark", "memberTip", "noteTip"})
+    public ResponseEnvelope addWeGroup(@RequestBody WeGroupDTO dto) {
         return iWeGroupService.addWeGroup(dto);
     }
 
     // 02-修改社群基本信息
-    @ApiOperation(value = "02-修改社群基本信息", notes = "修改社群基本信息")
+    @ApiOperation(position = 2, value = "02-修改社群基本信息", notes = "修改社群基本信息")
     @RequestMapping(value = "/updateWeGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.applyReason", "dto.createUid", "dto.groupMark","dto.memberTip","dto.noteTip"})
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.applyReason", "dto.createUid", "dto.groupMark", "dto.memberTip", "dto.noteTip"})
     public ResponseEnvelope updateWeGroup(@RequestBody WeGroupDTO dto) {
 
         return iWeGroupService.updateWeGroup(dto);
     }
 
     // 03-删除社群
-    @ApiOperation(value = "03-删除社群", notes = "删除社群")
+    @ApiOperation(position = 3, value = "03-删除社群", notes = "删除社群")
     @RequestMapping(value = "/deleteWeGroup", method = RequestMethod.GET)
     public ResponseEnvelope deleteWeGroup(Integer groupId) {
         return iWeGroupService.deleteWeGroup(groupId);
@@ -63,14 +62,14 @@ public class WeGroupController {
 
 
     // 04-搜索社群
-    @ApiOperation(value = "04-搜索社群", notes = "根据社群名称或描述，搜索结果列表分页显示")
+    @ApiOperation(position = 4, value = "04-搜索社群", notes = "根据社群名称或描述，搜索结果列表分页显示")
     @RequestMapping(value = "/searchGroup", method = RequestMethod.POST)
     public ResponseEnvelope searchWeGroupListPage(@RequestBody WeGroupSearchDTO dto) {
         return iWeGroupService.searchGroup(dto);
     }
 
     // 05-我加入的社群列表
-    @ApiOperation(value = "05-我加入的社群列表", notes = "我加入的社群列表，分页显示")
+    @ApiOperation(position = 5, value = "05-我加入的社群列表", notes = "我加入的社群列表，分页显示")
     @RequestMapping(value = "/getMyJoinGroupList", method = RequestMethod.POST)
     @ApiOperationSupport(ignoreParameters = {"dto.query"})
     public ResponseEnvelope getMyJoinGroupList(@RequestBody WeGroupSearchDTO dto) {
@@ -78,7 +77,7 @@ public class WeGroupController {
     }
 
     // 06-我管理的社群列表
-    @ApiOperation(value = "06-我管理的社群列表", notes = "我管理的社群列表，分页显示")
+    @ApiOperation(position = 6, value = "06-我管理的社群列表", notes = "我管理的社群列表，分页显示")
     @RequestMapping(value = "/getMyManagerGroupList", method = RequestMethod.POST)
     @ApiOperationSupport(ignoreParameters = {"dto.query"})
     public ResponseEnvelope getMyManagerGroupList(@RequestBody WeGroupSearchDTO dto) {
@@ -86,7 +85,7 @@ public class WeGroupController {
     }
 
     // 07-我加入的社群详情
-    @ApiOperation(value = "07-我加入的社群详情", notes = "查询我加入的指定的某一个社群及成员信息")
+    @ApiOperation(position = 7, value = "07-我加入的社群详情", notes = "查询我加入的指定的某一个社群及成员信息")
     @RequestMapping(value = "/myJoinGroupDetail", method = RequestMethod.GET)
     public ResponseEnvelope myJoinGroupDetail(Integer groupId, Integer uid) {
 
@@ -94,7 +93,7 @@ public class WeGroupController {
     }
 
     // 08-我管理的社群详情
-    @ApiOperation(value = "08-我管理的社群详情", notes = "查询我管理的指定的某一个社群及成员信息")
+    @ApiOperation(position = 8, value = "08-我管理的社群详情", notes = "查询我管理的指定的某一个社群及成员信息")
     @RequestMapping(value = "/myManagerGroupDetail", method = RequestMethod.GET)
     public ResponseEnvelope myManagerGroupDetail(Integer groupId, Integer uid) {
 
@@ -102,9 +101,9 @@ public class WeGroupController {
     }
 
     // 09-设置社群消息提醒
-    @ApiOperation(value = "09-设置社群消息提醒", notes = "09-设置社群消息提醒,0:关闭，1：打开")
+    @ApiOperation(position = 9, value = "09-设置社群消息提醒", notes = "09-设置社群消息提醒,0:关闭，1：打开")
     @RequestMapping(value = "/messageTips", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.groupName","dto.groupDesc","dto.applyReason","dto.groupHeadImg","dto.createUid","dto.groupMark"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage", "dto.pageSize", "dto.groupName", "dto.groupDesc", "dto.applyReason", "dto.groupHeadImg", "dto.createUid", "dto.groupMark"})
     public ResponseEnvelope messageTips(@RequestBody WeGroupDTO dto) {
         Integer groupId = dto.getGroupId();
         String memberTip = dto.getMemberTip();
@@ -113,7 +112,7 @@ public class WeGroupController {
     }
 
     // 10-统计我加入的社群信息
-    @ApiOperation(value = "10-统计我加入的社群信息", notes = "统计我加入的社群信息")
+    @ApiOperation(position = 10, value = "10-统计我加入的社群信息", notes = "统计我加入的社群信息")
     @RequestMapping(value = "/statGroup", method = RequestMethod.GET)
     public ResponseEnvelope statGroup(Integer uid) {
         return iWeGroupService.statsGroup(uid);

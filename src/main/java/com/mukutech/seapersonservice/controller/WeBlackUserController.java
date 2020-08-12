@@ -36,35 +36,36 @@ public class WeBlackUserController {
     @Autowired
     private IWeBlackUserService iWeBlackUserService;
 
-    @ApiOperation(value = "01-加入黑名单", notes = "将某个用户加入到黑名单中")
+    // position 用来在生成的文档中进行排序
+    @ApiOperation(position = 1, value = "01-加入黑名单", notes = "将某个用户加入到黑名单中")
     @RequestMapping(value = "/addBlack", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status","dto.query"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage", "dto.pageSize", "dto.status", "dto.query"})
     public ResponseEnvelope addBlack(@RequestBody WeBlackUserDTO dto) {
         Integer uid = dto.getUid();
         Integer blackUid = dto.getBlackUid();
-        return iWeBlackUserService.addBlack(uid,blackUid);
+        return iWeBlackUserService.addBlack(uid, blackUid);
     }
 
-    @ApiOperation(value = "02-从黑名单中移除", notes = "将某个用户从黑名单中移除")
+    @ApiOperation(position = 2, value = "02-从黑名单中移除", notes = "将某个用户从黑名单中移除")
     @RequestMapping(value = "/removeBlack", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status","dto.query"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage", "dto.pageSize", "dto.status", "dto.query"})
     public ResponseEnvelope removeBlack(@RequestBody WeBlackUserDTO dto) {
         Integer uid = dto.getUid();
         Integer blackUid = dto.getBlackUid();
-        return iWeBlackUserService.removeBlack(uid,blackUid);
+        return iWeBlackUserService.removeBlack(uid, blackUid);
     }
 
 
-    @ApiOperation(value = "03-获取某用户的全部黑名单", notes = "全部黑名单，分页显示")
+    @ApiOperation(position = 3, value = "03-获取某用户的全部黑名单", notes = "全部黑名单，分页显示")
     @RequestMapping(value = "/getAllBlackListPage", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.blackUid","dto.status","dto.query"})
+    @ApiOperationSupport(ignoreParameters = {"dto.blackUid", "dto.status", "dto.query"})
     public ResponseEnvelope getAllBlackListPage(@RequestBody WeBlackUserDTO dto) {
         return iWeBlackUserService.getAllBlackListPage(dto);
     }
 
-    @ApiOperation(value = "04-搜索某用户的黑名单", notes = "按被拉黑人的昵称和真名模糊匹配，分页显示")
+    @ApiOperation(position = 4, value = "04-搜索某用户的黑名单", notes = "按被拉黑人的昵称和真名模糊匹配，分页显示")
     @RequestMapping(value = "/searchBlackListPage", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.blackUid","dto.status"})
+    @ApiOperationSupport(ignoreParameters = {"dto.blackUid", "dto.status"})
     public ResponseEnvelope searchBlackListPage(@RequestBody WeBlackUserDTO dto) {
         return iWeBlackUserService.searchBlackListPage(dto);
     }
