@@ -1,22 +1,28 @@
 package com.mukutech.seapersonservice.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mukutech.seapersonservice.common.utils.BeanCopyUtil;
 import com.mukutech.seapersonservice.common.utils.ResultVOUtil;
 import com.mukutech.seapersonservice.common.utils.response.ResponseEnvelope;
 import com.mukutech.seapersonservice.entity.WeBlackUser;
 import com.mukutech.seapersonservice.mapper.WeBlackUserMapper;
+import com.mukutech.seapersonservice.pojo.dto.WeBlackUserDTO;
+import com.mukutech.seapersonservice.pojo.vo.WeBlackUserVO;
 import com.mukutech.seapersonservice.service.IWeBlackUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import com.mukutech.seapersonservice.pojo.entity.dto.WeBlackUserDTO;
+
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author LMYOU
@@ -25,55 +31,63 @@ import com.mukutech.seapersonservice.pojo.entity.dto.WeBlackUserDTO;
 @Slf4j
 @Transactional
 @Service
-        public class WeBlackUserServiceImpl extends ServiceImpl<WeBlackUserMapper, WeBlackUser> implements IWeBlackUserService {
+public class WeBlackUserServiceImpl extends ServiceImpl<WeBlackUserMapper, WeBlackUser> implements IWeBlackUserService {
 
 
-        @Autowired
-        private WeBlackUserMapper weBlackUserMapper;
+    @Autowired
+    private WeBlackUserMapper weBlackUserMapper;
 
-        @Override
-        public ResponseEnvelope searchWeBlackUserListPage(WeBlackUserDTO dto){
-        Page<WeBlackUser> page=new Page<WeBlackUser>();
+    // 01 - 加入黑名单
+    public ResponseEnvelope addBlack(Integer uid, Integer blackUid) {
+        // 1.
+        WeBlackUser weBlackUser = new WeBlackUser();
+        weBlackUser.setUid(uid);
+        weBlackUser.setBlackUid(blackUid);
+        weBlackUser.setStatus("1");
+        // 2.
+        weBlackUserMapper.insert(weBlackUser);
+        // 3.
+        return ResultVOUtil.returnSuccess();
+    }
+
+    // 02 - 从黑名单中移除
+    @Override
+    public ResponseEnvelope removeBlack(Integer uid, Integer blackUid) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("uid", uid);
+        map.put("black_uid", blackUid);
+
+        weBlackUserMapper.deleteByMap(map);
+        return ResultVOUtil.returnSuccess();
+    }
+
+    // 03 -根据用户uid获取黑名单，分页显示
+    @Override
+    public ResponseEnvelope getAllBlackListPage(WeBlackUserDTO dto) {
+        // 1. 定义分页对象并赋值
+        Page<WeBlackUserVO> page = new Page<>();
         page.setSize(dto.getPageSize());
         page.setCurrent(dto.getCurrentPage());
-        QueryWrapper<WeBlackUser> queryWrapper=new QueryWrapper<WeBlackUser>();
-    WeBlackUser entity=new WeBlackUser();
-        BeanCopyUtil.copyPropertiesIgnoreNull(dto,entity);
-        queryWrapper.setEntity(entity);
-        return ResultVOUtil.returnSuccess(weBlackUserMapper.selectPage(page,queryWrapper));
-        }
-        @Override
-        public ResponseEnvelope searchWeBlackUserOne(Integer id){
+        // 2. 执行查询
+        List<WeBlackUserVO> list = weBlackUserMapper.getBlackListByUid(page, dto.getUid());
+        page.setRecords(list);
+        // 3.返回结果
+        return ResultVOUtil.returnSuccess(page);
+    }
 
-        return ResultVOUtil.returnSuccess(this.selectOne(id));
-        }
-        @Override
-        public ResponseEnvelope addWeBlackUser(WeBlackUserDTO dto){
-    WeBlackUser entity=new WeBlackUser();
-        BeanCopyUtil.copyPropertiesIgnoreNull(dto,entity);
-    weBlackUserMapper.insert(entity);
-        return ResultVOUtil.returnSuccess();
-        }
-        @Override
-        public ResponseEnvelope updateWeBlackUser(WeBlackUserDTO dto){
-    WeBlackUser entity=this.selectOne(dto.getId());
-        BeanCopyUtil.copyPropertiesIgnoreNull(dto,entity);
-    weBlackUserMapper.updateById(entity);
-        return ResultVOUtil.returnSuccess();
-        }
-        @Override
-        public ResponseEnvelope deleteWeBlackUser(Integer id){
-    weBlackUserMapper.deleteById(id);
-        return ResultVOUtil.returnSuccess();
-        }
+    // 04 - 搜索指定用户的黑名单，按被拉黑人的昵称和真名模糊匹配
+    @Override
+    public ResponseEnvelope searchBlackListPage(WeBlackUserDTO dto) {
+        // 1. 定义分页对象并赋值
+        Page<WeBlackUserVO> page = new Page<>();
+        page.setSize(dto.getPageSize());
+        page.setCurrent(dto.getCurrentPage());
+        // 2. 执行查询
+        String query = "%" + dto.getQuery() + "%";
+        List<WeBlackUserVO> list = weBlackUserMapper.searchBlackList(page, dto.getUid(), query);
+        page.setRecords(list);
+        // 3.返回结果
+        return ResultVOUtil.returnSuccess(page);
+    }
 
-
-        public WeBlackUser selectOne(Integer id){
-    WeBlackUser entity=new WeBlackUser();
-        entity.setId(id);
-        QueryWrapper<WeBlackUser>queryWrapper=new QueryWrapper<>();
-        queryWrapper.setEntity(entity);
-        return weBlackUserMapper.selectOne(queryWrapper);
-        }
-
-        }
+}

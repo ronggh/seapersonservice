@@ -1,7 +1,9 @@
 package com.mukutech.seapersonservice.controller;
 
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.mukutech.seapersonservice.common.utils.response.ResponseEnvelope;
+import com.mukutech.seapersonservice.pojo.dto.WeBlackUserDTO;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
@@ -12,55 +14,59 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import lombok.extern.slf4j.Slf4j;
 import com.mukutech.seapersonservice.service.IWeBlackUserService;
-import com.mukutech.seapersonservice.pojo.entity.dto.WeBlackUserDTO;
+
 import org.springframework.stereotype.Controller;
-
-
 
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author LMYOU
  * @since 2020-08-07
  */
 @Slf4j
-@Api(tags = {"API"})
-    @Controller
+@Api(tags = {"黑名单管理"})
+@Controller
 @RequestMapping("/seapersonservice/weBlackUser")
 @ResponseBody
-    public class WeBlackUserController {
+public class WeBlackUserController {
 
-@Autowired
-private IWeBlackUserService  iWeBlackUserService;
+    @Autowired
+    private IWeBlackUserService iWeBlackUserService;
+
+    @ApiOperation(value = "01-加入黑名单", notes = "将某个用户加入到黑名单中")
+    @RequestMapping(value = "/addBlack", method = RequestMethod.POST)
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status"})
+    public ResponseEnvelope addBlack(@RequestBody WeBlackUserDTO dto) {
+        Integer uid = dto.getUid();
+        Integer blackUid = dto.getBlackUid();
+        return iWeBlackUserService.addBlack(uid,blackUid);
+    }
+
+    @ApiOperation(value = "02-从黑名单中移除", notes = "将某个用户从黑名单中移除")
+    @RequestMapping(value = "/removeBlack", method = RequestMethod.POST)
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status"})
+    public ResponseEnvelope removeBlack(@RequestBody WeBlackUserDTO dto) {
+        Integer uid = dto.getUid();
+        Integer blackUid = dto.getBlackUid();
+        return iWeBlackUserService.removeBlack(uid,blackUid);
+    }
 
 
-@ApiOperation(value = "列表分页查询", notes = "API")
-@RequestMapping(value = "/searchWeBlackUserListPage", method = RequestMethod.POST)
-public ResponseEnvelope searchWeBlackUserListPage(@RequestBody WeBlackUserDTO  dto){
-        return iWeBlackUserService.searchWeBlackUserListPage(dto);
-        }
-@ApiOperation(value = "详细查询", notes = "API")
-@RequestMapping(value = "/searchWeBlackUserOne", method = RequestMethod.GET)
-public ResponseEnvelope searchWeBlackUserOne(Integer id){
-        return iWeBlackUserService.searchWeBlackUserOne(id);
-        }
-@ApiOperation(value = "添加", notes = "API")
-@RequestMapping(value = "/addWeBlackUser", method = RequestMethod.POST)
-public ResponseEnvelope addWeBlackUser(@RequestBody com.mukutech.seapersonservice.pojo.entity.dto.WeBlackUserDTO dto){
-        return iWeBlackUserService.addWeBlackUser(dto);
-        }
-@ApiOperation(value = "更新", notes = "API")
-@RequestMapping(value = "/updateWeBlackUser", method = RequestMethod.POST)
-public ResponseEnvelope updateWeBlackUser(@RequestBody WeBlackUserDTO dto){
-        return iWeBlackUserService.updateWeBlackUser(dto);
-        }
-@ApiOperation(value = "删除", notes = "API")
-@RequestMapping(value = "/deleteWeBlackUser", method = RequestMethod.GET)
-public ResponseEnvelope deleteWeBlackUser(Integer id){
-        return iWeBlackUserService.deleteWeBlackUser(id);
-        }
+    @ApiOperation(value = "03-获取某用户的全部黑名单", notes = "全部黑名单，分页显示")
+    @RequestMapping(value = "/getAllBlackListPage", method = RequestMethod.POST)
+    @ApiOperationSupport(ignoreParameters = {"dto.blackUid","dto.status","dto.query"})
+    public ResponseEnvelope getAllBlackListPage(@RequestBody WeBlackUserDTO dto) {
+        return iWeBlackUserService.getAllBlackListPage(dto);
+    }
 
-        }
+    @ApiOperation(value = "04-搜索某用户的黑名单", notes = "按被拉黑人的昵称和真名模糊匹配，分页显示")
+    @RequestMapping(value = "/searchBlackListPage", method = RequestMethod.POST)
+    @ApiOperationSupport(ignoreParameters = {"dto.blackUid","dto.status"})
+    public ResponseEnvelope searchBlackListPage(@RequestBody WeBlackUserDTO dto) {
+        return iWeBlackUserService.searchBlackListPage(dto);
+    }
+
+}

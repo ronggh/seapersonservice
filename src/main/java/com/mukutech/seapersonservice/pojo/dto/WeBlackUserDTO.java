@@ -1,15 +1,16 @@
-package com.mukutech.seapersonservice.pojo.entity.dto;
+package com.mukutech.seapersonservice.pojo.dto;
 
-import com.mukutech.seapersonservice.pojo.dto.BaseDTO;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author LMYOU
@@ -19,16 +20,11 @@ import java.time.LocalDateTime;
 @Setter
 public class WeBlackUserDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer id;
 
     private Integer uid;
-
     private Integer blackUid;
-
     private String status;
+    @ApiModelProperty(value = "模糊查询字符串，用来匹配被拉黑的用户昵称或真名")
+    private String query;
 
-    private LocalDateTime createtime;
-
-    private LocalDateTime updatetime;
-
-    }
+}
