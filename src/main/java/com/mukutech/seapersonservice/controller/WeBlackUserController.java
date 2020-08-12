@@ -38,7 +38,7 @@ public class WeBlackUserController {
 
     @ApiOperation(value = "01-加入黑名单", notes = "将某个用户加入到黑名单中")
     @RequestMapping(value = "/addBlack", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status","dto.query"})
     public ResponseEnvelope addBlack(@RequestBody WeBlackUserDTO dto) {
         Integer uid = dto.getUid();
         Integer blackUid = dto.getBlackUid();
@@ -47,7 +47,7 @@ public class WeBlackUserController {
 
     @ApiOperation(value = "02-从黑名单中移除", notes = "将某个用户从黑名单中移除")
     @RequestMapping(value = "/removeBlack", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.status","dto.query"})
     public ResponseEnvelope removeBlack(@RequestBody WeBlackUserDTO dto) {
         Integer uid = dto.getUid();
         Integer blackUid = dto.getBlackUid();

@@ -39,11 +39,11 @@ public class WeBlackUserServiceImpl extends ServiceImpl<WeBlackUserMapper, WeBla
 
     // 01 - 加入黑名单
     public ResponseEnvelope addBlack(Integer uid, Integer blackUid) {
-        // 1.
+        // 1. 初始化实体类
         WeBlackUser weBlackUser = new WeBlackUser();
         weBlackUser.setUid(uid);
         weBlackUser.setBlackUid(blackUid);
-        weBlackUser.setStatus("1");
+        weBlackUser.setStatus("1"); // 1：代表有效数据
         // 2.
         weBlackUserMapper.insert(weBlackUser);
         // 3.
@@ -68,6 +68,7 @@ public class WeBlackUserServiceImpl extends ServiceImpl<WeBlackUserMapper, WeBla
         Page<WeBlackUserVO> page = new Page<>();
         page.setSize(dto.getPageSize());
         page.setCurrent(dto.getCurrentPage());
+
         // 2. 执行查询
         List<WeBlackUserVO> list = weBlackUserMapper.getBlackListByUid(page, dto.getUid());
         page.setRecords(list);

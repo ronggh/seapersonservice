@@ -10,18 +10,20 @@ import java.util.Date;
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
 
-    Date date = new Date();
+
 
 
     @Override
     public void insertFill(MetaObject metaObject) {
 
+        Date date = new Date();
         this.strictInsertFill(metaObject, "createtime", Date.class, date);
         this.strictUpdateFill(metaObject, "updatetime", Date.class, date);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
+        Date date = new Date();
         metaObject.setValue("updatetime", null);
         this.strictUpdateFill(metaObject, "updatetime", Date.class, date);
     }
