@@ -1,6 +1,7 @@
 package com.mukutech.seapersonservice.pojo.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +24,8 @@ public class WeGroupMemberDTO extends BaseDTO implements Serializable {
     private Integer groupId;
     private Integer uid;
     private String userRole;
+    @ApiModelProperty(value = "是否禁言")
     private String isForbidden;
 
-    // private String status;
-    // private String createtime;
-    // private String updatetime;
 
 }

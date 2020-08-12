@@ -39,16 +39,18 @@ public class WeGroupController {
     // 01-创建社群
     @ApiOperation(value = "01-创建社群", notes = "创建社群")
     @RequestMapping(value = "/addWeGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.groupId"})
-    public ResponseEnvelope addWeGroup(@RequestBody WeGroupDTO dto) {
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.groupId","dto.groupMark","memberTip","noteTip"})
+    public ResponseEnvelope addWeGroup(@RequestBody WeGroupDTO dto)
+    {
         return iWeGroupService.addWeGroup(dto);
     }
 
     // 02-修改社群基本信息
     @ApiOperation(value = "02-修改社群基本信息", notes = "修改社群基本信息")
     @RequestMapping(value = "/updateWeGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.applyReason", "dto.createUid", "dto.group_mark"})
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.applyReason", "dto.createUid", "dto.groupMark","dto.memberTip","dto.noteTip"})
     public ResponseEnvelope updateWeGroup(@RequestBody WeGroupDTO dto) {
+
         return iWeGroupService.updateWeGroup(dto);
     }
 
@@ -102,7 +104,7 @@ public class WeGroupController {
     // 09-设置社群消息提醒
     @ApiOperation(value = "09-设置社群消息提醒", notes = "09-设置社群消息提醒,0:关闭，1：打开")
     @RequestMapping(value = "/messageTips", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.groupName","dto.groupDesc","dto.applyReason","dto.groupHeadImg","dto.createUid","dto.group_mark"})
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.groupName","dto.groupDesc","dto.applyReason","dto.groupHeadImg","dto.createUid","dto.groupMark"})
     public ResponseEnvelope messageTips(@RequestBody WeGroupDTO dto) {
         Integer groupId = dto.getGroupId();
         String memberTip = dto.getMemberTip();

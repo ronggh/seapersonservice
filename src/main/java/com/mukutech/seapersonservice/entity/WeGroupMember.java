@@ -38,9 +38,9 @@ public class WeGroupMember extends Model<WeGroupMember> {
     @TableLogic(value = "1",delval = "0")
     private String status;
     @TableField(fill = FieldFill.INSERT)
-    private String createtime;
+    private Date createtime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updatetime;
+    private Date updatetime;
 
     @Override
     protected Serializable pkVal() {

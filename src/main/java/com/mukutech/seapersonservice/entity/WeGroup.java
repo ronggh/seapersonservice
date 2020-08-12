@@ -48,9 +48,9 @@ public class WeGroup extends Model<WeGroup> {
     private String group_mark;
 
     @TableField(fill = FieldFill.INSERT)
-    private String createtime;
+    private Date createtime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updatetime;
+    private Date updatetime;
 
 
     @Override

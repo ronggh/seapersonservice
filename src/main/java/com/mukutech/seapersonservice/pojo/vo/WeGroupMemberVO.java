@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -31,8 +32,8 @@ public class WeGroupMemberVO implements Serializable {
     private String status;
 
 
-    private String createtime;
+    private Date createtime;
 
-    private String updatetime;
+    private Date updatetime;
 
     }

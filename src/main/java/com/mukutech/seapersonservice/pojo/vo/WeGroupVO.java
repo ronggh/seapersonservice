@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -48,8 +49,8 @@ public class WeGroupVO implements Serializable {
     private String status;
     private String group_mark;
 
-    private String createtime;
+    private Date createtime;
 
-    private String updatetime;
+    private Date updatetime;
 
     }

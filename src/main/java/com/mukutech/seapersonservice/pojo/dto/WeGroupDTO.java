@@ -1,6 +1,7 @@
 package com.mukutech.seapersonservice.pojo.dto;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author LMYOU
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 public class WeGroupDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableField(value = "group_id")
+    @ApiModelProperty(value = "社群Id")
     private Integer groupId;
 
     private String groupName;
@@ -31,22 +32,16 @@ public class WeGroupDTO extends BaseDTO implements Serializable {
 
     private String groupHeadImg;
 
-   // private String verifyFlag;
+    // private String verifyFlag;
 
     private Integer createUid;
-    private String group_mark;
+    private String groupMark;
 
     //private Integer schoolId;
-
-//
+    //
+    @ApiModelProperty(value = "添加成员是否提醒")
     private String memberTip;
-
+    @ApiModelProperty(value = "发布新内容是否提醒")
     private String noteTip;
 
-  //  private String status;
-
-//    private LocalDateTime createtime;
-//
-//    private LocalDateTime updatetime;
-
-    }
+}
