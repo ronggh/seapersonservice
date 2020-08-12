@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author LMYOU
@@ -16,25 +16,17 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
-public class WeGroupMemberDTO extends  BaseDTO implements Serializable {
+public class WeGroupMemberDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableField(value = "group_id")
     private Integer id;
-
-
     private Integer groupId;
-
     private Integer uid;
+    private String userRole;
+    private String isForbidden;
 
-    //private String userRole;
+    // private String status;
+    // private String createtime;
+    // private String updatetime;
 
-    //private String isForbidden;
-
-   // private String status;
-
-   // private String createtime;
-
-   // private String updatetime;
-
-    }
+}

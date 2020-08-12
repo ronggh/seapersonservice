@@ -44,10 +44,10 @@ public class WeGroupController {
         return iWeGroupService.addWeGroup(dto);
     }
 
-    // 02-更新社群
-    @ApiOperation(value = "02-更新社群", notes = "更新社群")
+    // 02-修改社群基本信息
+    @ApiOperation(value = "02-修改社群基本信息", notes = "修改社群基本信息")
     @RequestMapping(value = "/updateWeGroup", method = RequestMethod.POST)
-    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage"})
+    @ApiOperationSupport(ignoreParameters = {"dto.pageSize", "dto.currentPage", "dto.applyReason", "dto.createUid", "dto.group_mark"})
     public ResponseEnvelope updateWeGroup(@RequestBody WeGroupDTO dto) {
         return iWeGroupService.updateWeGroup(dto);
     }
@@ -91,4 +91,29 @@ public class WeGroupController {
         return iWeGroupService.myJoinGroupDetail(groupId, uid);
     }
 
+    // 08-我管理的社群详情
+    @ApiOperation(value = "08-我管理的社群详情", notes = "查询我管理的指定的某一个社群及成员信息")
+    @RequestMapping(value = "/myManagerGroupDetail", method = RequestMethod.GET)
+    public ResponseEnvelope myManagerGroupDetail(Integer groupId, Integer uid) {
+
+        return iWeGroupService.myManagerGroupDetail(groupId, uid);
+    }
+
+    // 09-设置社群消息提醒
+    @ApiOperation(value = "09-设置社群消息提醒", notes = "09-设置社群消息提醒,0:关闭，1：打开")
+    @RequestMapping(value = "/messageTips", method = RequestMethod.POST)
+    @ApiOperationSupport(ignoreParameters = {"dto.currentPage","dto.pageSize","dto.groupName","dto.groupDesc","dto.applyReason","dto.groupHeadImg","dto.createUid","dto.group_mark"})
+    public ResponseEnvelope messageTips(@RequestBody WeGroupDTO dto) {
+        Integer groupId = dto.getGroupId();
+        String memberTip = dto.getMemberTip();
+        String noteTip = dto.getNoteTip();
+        return iWeGroupService.messageTips(groupId, memberTip, noteTip);
+    }
+
+    // 10-统计我加入的社群信息
+    @ApiOperation(value = "10-统计我加入的社群信息", notes = "统计我加入的社群信息")
+    @RequestMapping(value = "/statGroup", method = RequestMethod.GET)
+    public ResponseEnvelope statGroup(Integer uid) {
+        return iWeGroupService.statsGroup(uid);
+    }
 }

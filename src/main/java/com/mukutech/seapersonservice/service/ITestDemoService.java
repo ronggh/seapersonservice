@@ -19,13 +19,13 @@ import java.util.List;
 public interface ITestDemoService extends IService<TestDemo> {
     ResponseEnvelope searchTestDemoListPage(TestDemoDTO DTO);
 
-    public ResponseEnvelope searchTestDemoOne(Integer id);
+    ResponseEnvelope searchTestDemoOne(Integer id);
 
-    public ResponseEnvelope addTestDemo(TestDemoDTO DTO);
+    ResponseEnvelope addTestDemo(TestDemoDTO DTO);
 
-    public ResponseEnvelope updateTestDemo(TestDemoDTO DTO);
+    ResponseEnvelope updateTestDemo(TestDemoDTO DTO);
 
-    public ResponseEnvelope deleteTestDemo(Integer id);
+    ResponseEnvelope deleteTestDemo(Integer id);
 
     ResponseEnvelope addNotes(NotesDTO dto);
 

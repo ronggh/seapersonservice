@@ -15,9 +15,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IWeGroupMemberService extends IService<WeGroupMember> {
     // 01 - 加入社群
-    public ResponseEnvelope joinGroup(Integer uid, Integer groupId);
+    ResponseEnvelope joinGroup(Integer uid, Integer groupId);
 
     // 02 - 退出社群
-    public ResponseEnvelope quitGroup(Integer uid, Integer groupId);
+    ResponseEnvelope quitGroup(Integer uid, Integer groupId);
+
+    // 03 - 成员禁言/解禁
+    // isForbidden：0,解禁；1：禁言
+    ResponseEnvelope forbiddenOrNot(Integer groupId,Integer uid,String isForbidden);
 
 }

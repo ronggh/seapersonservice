@@ -15,17 +15,18 @@ import com.mukutech.seapersonservice.mapper.WeGroupMemberMapper;
 import com.mukutech.seapersonservice.pojo.dto.WeGroupDTO;
 
 import com.mukutech.seapersonservice.pojo.dto.WeGroupSearchDTO;
-import com.mukutech.seapersonservice.pojo.vo.WeGroupAndMemberBriefVO;
-import com.mukutech.seapersonservice.pojo.vo.WeGroupSearchResultVO;
-import com.mukutech.seapersonservice.pojo.vo.WeUserVO;
+import com.mukutech.seapersonservice.pojo.vo.*;
 import com.mukutech.seapersonservice.service.IWeGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mukutech.seapersonservice.common.utils.ResultVOUtil.returnSuccess;
 
 /**
  * <p>
@@ -55,10 +56,10 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
         entity.setMemberTip("0");//消息提醒-新增
         entity.setNoteTip("0");//消息提醒-发布
         weGroupMapper.insert(entity);
-        return ResultVOUtil.returnSuccess();
+        return returnSuccess();
     }
 
-    // 02 - 更新社群
+    // 02 - 修改社群基本信息
     @Override
     public ResponseEnvelope updateWeGroup(WeGroupDTO dto) {
         WeGroup entity = new WeGroup();
@@ -66,7 +67,7 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
         BeanCopyUtil.copyPropertiesIgnoreNull(dto, entity);
         entity.setStatus("1");
         weGroupMapper.updateById(entity);
-        return ResultVOUtil.returnSuccess();
+        return returnSuccess();
     }
 
     // 03 - 删除社群
@@ -74,7 +75,7 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
     public ResponseEnvelope deleteWeGroup(Integer groupId) {
         //  System.out.println("=========="+groupId);
         weGroupMapper.deleteById(groupId);
-        return ResultVOUtil.returnSuccess();
+        return returnSuccess();
     }
 
     // 04 - 搜索社群
@@ -137,7 +138,7 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
         resultPage.setPages(page.getPages());
 
         resultPage.setRecords(result);
-        return ResultVOUtil.returnSuccess(resultPage);
+        return returnSuccess(resultPage);
     }
 
     // 05 - 我加入的社群列表，分页显示
@@ -171,7 +172,7 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
             page.setRecords(list);
         }
 
-        return ResultVOUtil.returnSuccess(page);
+        return returnSuccess(page);
     }
 
     // 06 - 我管理的社群列表，分页显示
@@ -202,7 +203,7 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
             page.setRecords(list);
         }
 
-        return ResultVOUtil.returnSuccess(page);
+        return returnSuccess(page);
     }
 
     // 07 - 我加入的社群详情况，包括成员简要信息
@@ -229,7 +230,97 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
         vo.setMembers(members);
 
         // 5. 封装结果，返回
-        return ResultVOUtil.returnSuccess(vo);
+        return returnSuccess(vo);
+    }
+
+    // 08 - 我管理的社群详情， 包括获取社群成员简要信息
+    @Override
+    public ResponseEnvelope myManagerGroupDetail(Integer groupId, Integer uid) {
+        // 0. 先判断uid是否为该社群的管理员
+        Integer isManager = weGroupMemberMapper.isManager(uid, groupId);
+        // 不是管理，直接返回空
+        if (isManager <= 0) {
+            return ResultVOUtil.returnSuccess();
+        }
+        // 1. 初始化返回结果
+        WeGroupAndMemberBriefVO vo = new WeGroupAndMemberBriefVO();
+        // 2. 获取社群基本信息
+        WeGroup weGroup = this.selectOne(groupId);
+        vo.setGroupId(groupId);
+        vo.setGroupName(weGroup.getGroupName());
+        vo.setGroupDesc(weGroup.getGroupDesc());
+        vo.setGroupHeadImg(weGroup.getGroupHeadImg());
+        // 增加两个提醒设置字段
+        vo.setMemberTip(weGroup.getMemberTip());
+        vo.setNoteTip(weGroup.getNoteTip());
+
+        // 3. 获取社群管理员信息
+        List<WeUserVO> admins = weGroupMapper.getMemberBrief(groupId, "1");
+        // 处理关注关系
+        admins = this.processFollow(uid, admins);
+        vo.setAdmins(admins);
+        // 4. 获取社群成员信息
+        List<WeUserVO> members = weGroupMapper.getMemberBrief(groupId, "2");
+        // 处理关注关系
+        members = this.processFollow(uid, members);
+        vo.setMembers(members);
+
+        // 5. 封装结果，返回
+        return returnSuccess(vo);
+    }
+
+    // 09 - 设置社区消息提醒
+    // memberTip:新增组员是否提醒，0：关闭；1：打开
+    // noteTip:有新的发布是否提醒，0：关闭；1：打开
+    @Override
+    public ResponseEnvelope messageTips(Integer groupId, String memberTip, String noteTip) {
+        WeGroup weGroup = weGroupMapper.selectById(groupId);
+        if (!StringUtils.isEmpty(memberTip)) {
+            weGroup.setMemberTip(memberTip);
+        }
+        if (!StringUtils.isEmpty(noteTip)) {
+            weGroup.setNoteTip(noteTip);
+        }
+        weGroupMapper.updateById(weGroup);
+
+        return returnSuccess();
+    }
+
+    // 10 - 社群首页统计信息
+    @Override
+    public ResponseEnvelope statsGroup(Integer uid){
+        // 1. 初始化变量
+        WeGroupStatsVO vo = new WeGroupStatsVO();
+
+        // 2. 获取我加入的非学校社群数量和HeadImg
+        Integer joinNum = weGroupMapper.statsJoinGroupNum(uid);
+        WeGroupMyJoinVO weGroupMyJoinVO = new WeGroupMyJoinVO();
+        weGroupMyJoinVO.setGroupNum(joinNum);
+        List<WeGroupLogoVO> joinImgs = weGroupMapper.getJoinGroupHeadImg(uid);
+        weGroupMyJoinVO.setGroupHeadImg(joinImgs);
+        // 加入到结果集中
+        vo.setMyJoin(weGroupMyJoinVO);
+
+        // 3. 获取我加入的学校社群
+        List<WeGroupSchoolMyJoinVO> schools = weGroupMapper.getJoinSchoolGroup(uid);
+        if(schools !=null && !schools.isEmpty())
+        {
+            for(int index = 0; index < schools.size(); index++){
+                WeGroupSchoolMyJoinVO schoolVO = schools.get(index);
+                Integer schoolId = schoolVO.getSchoolId();
+                // 根据学校Id获取加入该学校的社群数量
+                Integer num  = weGroupMapper.getSchoolGroupNum(schoolId);
+                schoolVO.setGroupNum(num);
+                // 根据学校Id获取加入该学校的社群的LOGO
+                List<WeGroupLogoVO> imgs = weGroupMapper.getSchoolGroupHeadImg(schoolId);
+                schoolVO.setGroupHeadImg(imgs);
+            }
+        }
+
+        // 加入到结果集中
+        vo.setMySchools(schools);
+        // 封装结果，返回
+        return returnSuccess(vo);
     }
 
 
@@ -275,8 +366,8 @@ public class WeGroupServiceImpl extends ServiceImpl<WeGroupMapper, WeGroup> impl
             } else {
                 item.setFollow(0);
             }
+
         }
         return list;
     }
-
 }

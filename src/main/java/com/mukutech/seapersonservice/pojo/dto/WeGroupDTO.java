@@ -38,13 +38,10 @@ public class WeGroupDTO extends BaseDTO implements Serializable {
 
     //private Integer schoolId;
 
-//    private Integer area;
 //
-//    private Integer topic;
-//
-//    private String memberTip;
-//
-//    private String noteTip;
+    private String memberTip;
+
+    private String noteTip;
 
   //  private String status;
 

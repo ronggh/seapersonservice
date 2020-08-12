@@ -1,5 +1,6 @@
 package com.mukutech.seapersonservice.pojo.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WeGroupVO implements Serializable {
     private static final long serialVersionUID = 1L;
+
     private Integer groupId;
 
     private String groupName;

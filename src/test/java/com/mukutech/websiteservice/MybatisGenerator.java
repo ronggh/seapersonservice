@@ -25,7 +25,7 @@ public class MybatisGenerator {
     static String[] tables = new String[]{"we_group_member"};
     //static String delete_falg = "DEL_FLAG";
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
@@ -133,7 +133,7 @@ public class MybatisGenerator {
         strategy.setTableFillList(tableFills);
 
         // 此处可以修改为您的表前缀
-        strategy.setTablePrefix(new String[]{"T_"});
+        strategy.setTablePrefix("T_");
         // 表名生成策略
         strategy.setNaming(NamingStrategy.underline_to_camel);
         // 需要生成的表

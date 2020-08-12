@@ -60,6 +60,36 @@ public class WeGroupMemberServiceImpl extends ServiceImpl<WeGroupMemberMapper, W
         return ResultVOUtil.returnSuccess();
     }
 
+    // 03 - 成员禁言/解禁
+    // isForbidden：0,解禁；1：禁言
+    public ResponseEnvelope forbiddenOrNot(Integer groupId,Integer uid,String isForbidden){
+        // 条件更新
+        WeGroupMember weGroupMember = this.selectBy(groupId,uid);
+        // 非空则进行更新
+        if(weGroupMember != null){
+            weGroupMember.setIsForbidden(isForbidden);
+            weGroupMemberMapper.updateById(weGroupMember);
+        }
+        return ResultVOUtil.returnSuccess();
+    }
+
+
+    // 获取指定的数据
+    private WeGroupMember selectBy(Integer groupId,Integer uid){
+        // 1. 初始化对象，构造查询条件
+        Map<String,Object> map = new HashMap<>();
+        map.put("group_id",groupId);
+        map.put("uid",uid);
+        map.put("status","1");
+
+        // 查询
+        List<WeGroupMember> list = weGroupMemberMapper.selectByMap(map);
+        // 查到，则返回第一条数据即可
+        if(list != null && !list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
+    }
     // 查询指定的数据是否存在
     private Integer exists(Integer uid,Integer groupId){
         Map<String,Object> map = new HashMap<>();

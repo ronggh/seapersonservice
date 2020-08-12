@@ -30,6 +30,7 @@ public class WeGroupMemberVO implements Serializable {
 
     private String status;
 
+
     private String createtime;
 
     private String updatetime;

@@ -1,16 +1,11 @@
 package com.mukutech.seapersonservice.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.mukutech.seapersonservice.common.utils.response.ResponseEnvelope;
 import com.mukutech.seapersonservice.entity.WeGroup;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.mukutech.seapersonservice.pojo.dto.WeGroupDTO;
 import com.mukutech.seapersonservice.pojo.dto.WeGroupSearchDTO;
-import com.mukutech.seapersonservice.pojo.vo.WeGroupSearchResultVO;
-import com.mukutech.seapersonservice.pojo.vo.WeUserVO;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 
 /**
@@ -23,27 +18,37 @@ import java.util.List;
  */
 public interface IWeGroupService extends IService<WeGroup> {
     // 01 - 创建社群
-    public ResponseEnvelope addWeGroup(WeGroupDTO DTO);
+    ResponseEnvelope addWeGroup(WeGroupDTO DTO);
 
     // 02 - 更新社群
-    public ResponseEnvelope updateWeGroup(WeGroupDTO DTO);
+    ResponseEnvelope updateWeGroup(WeGroupDTO DTO);
 
     // 03 - 删除社群
-    public ResponseEnvelope deleteWeGroup(Integer groupId);
+    ResponseEnvelope deleteWeGroup(Integer groupId);
 
 
     // 04 - 搜索社群
     // 根据社群名称或描述，搜索社群列表，分页显示
-    public ResponseEnvelope searchGroup(WeGroupSearchDTO dto);
+    ResponseEnvelope searchGroup(WeGroupSearchDTO dto);
 
     // 05 - 我加入的社群列表，分页显示
-    public ResponseEnvelope getMyJoinGroupList(WeGroupSearchDTO dto);
+    ResponseEnvelope getMyJoinGroupList(WeGroupSearchDTO dto);
 
     // 06 - 我管理的社群列表，分页显示
-    public ResponseEnvelope getMyManagerGroupList(WeGroupSearchDTO dto);
+    ResponseEnvelope getMyManagerGroupList(WeGroupSearchDTO dto);
 
 
-    // 07- 我加入的社群详情， 包括获取社群成员简要信息
-    public ResponseEnvelope myJoinGroupDetail(Integer groupId, Integer uid);
+    // 07 - 我加入的社群详情， 包括获取社群成员简要信息
+    ResponseEnvelope myJoinGroupDetail(Integer groupId, Integer uid);
 
+    // 08 - 我管理的社群详情， 包括获取社群成员简要信息
+    ResponseEnvelope myManagerGroupDetail(Integer groupId, Integer uid);
+
+    // 09 - 设置社区消息提醒
+    // memberTip:新增组员是否提醒，0：关闭；1：打开
+    // noteTip:有新的发布是否提醒，0：关闭；1：打开
+    ResponseEnvelope messageTips(Integer groupId,String memberTip,String noteTip);
+
+    // 10 - 统计用户加入的社群信息
+    ResponseEnvelope statsGroup(Integer uid);
 }

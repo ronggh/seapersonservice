@@ -14,9 +14,9 @@ import com.mukutech.seapersonservice.pojo.entity.dto.WeBlackUserDTO;
  * @since 2020-08-07
  */
 public interface IWeBlackUserService extends IService<WeBlackUser> {
-public ResponseEnvelope searchWeBlackUserListPage(WeBlackUserDTO DTO);
-public ResponseEnvelope searchWeBlackUserOne(Integer id);
-public ResponseEnvelope addWeBlackUser(WeBlackUserDTO DTO);
-public ResponseEnvelope updateWeBlackUser(WeBlackUserDTO DTO);
-public ResponseEnvelope deleteWeBlackUser(Integer id);
+ResponseEnvelope searchWeBlackUserListPage(WeBlackUserDTO DTO);
+ResponseEnvelope searchWeBlackUserOne(Integer id);
+ResponseEnvelope addWeBlackUser(WeBlackUserDTO DTO);
+ResponseEnvelope updateWeBlackUser(WeBlackUserDTO DTO);
+ResponseEnvelope deleteWeBlackUser(Integer id);
         }
