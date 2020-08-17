@@ -1,10 +1,9 @@
 package com.mukutech.seapersonservice.pojo.vo;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -15,15 +14,16 @@ import java.io.Serializable;
  * @since 2020-08-07
  */
 @Data
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+// @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WeGroupSearchResultVO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "社群ID")
     private Integer groupId;
+    @ApiModelProperty(value = "社群名称")
     private String groupName;
     private String groupDesc;
     private String groupHeadImg;
-//    private Integer createUid;
+    // private Integer createUid;
     private Integer schoolId;
 
     // 加入社群人数

@@ -1,10 +1,9 @@
 package com.mukutech.seapersonservice.pojo.dto;
 
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-
-import java.io.Serializable;
 
 /**
  * <p>
@@ -17,10 +16,10 @@ import java.io.Serializable;
 @Data
 public class WeGroupSearchDTO extends BaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
-    //
-    @ApiModelProperty(value ="用户Id")
+
+    @ApiModelProperty(value = "用户Id")
     private Integer uid;
-    //
-    @ApiModelProperty(value ="查询字符串")
+
+    @ApiModelProperty(value = "查询字符串")
     private String query;
 }

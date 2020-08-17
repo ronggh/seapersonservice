@@ -1,9 +1,8 @@
 package com.mukutech.seapersonservice.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.mukutech.seapersonservice.common.utils.response.ResponseEnvelope;
 import com.mukutech.seapersonservice.entity.WeGroupMember;
-import com.baomidou.mybatisplus.extension.service.IService;
-
 
 /**
  * <p>
@@ -20,8 +19,11 @@ public interface IWeGroupMemberService extends IService<WeGroupMember> {
     // 02 - 退出社群
     ResponseEnvelope quitGroup(Integer uid, Integer groupId);
 
-    // 03 - 成员禁言/解禁
-    // isForbidden：0,解禁；1：禁言
-    ResponseEnvelope forbiddenOrNot(Integer groupId,Integer uid,String isForbidden);
+    // 03 - 成员禁言
+    public ResponseEnvelope forbidden(Integer groupId, Integer uid);
+
+    // 解禁
+    // 04 - 解禁禁言
+    public ResponseEnvelope removeForbidden(Integer groupId, Integer uid);
 
 }
